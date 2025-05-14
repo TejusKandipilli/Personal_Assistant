@@ -4,7 +4,6 @@ import cors from 'cors';
 import session from 'express-session';
 import { google } from "googleapis";
 import AudioPaths from './paths/AudioPaths.js';  // Ensure .js is added if using ESModules
-import ChatPaths from './paths/ChatPaths.js';
 
 dotenv.config();
 
