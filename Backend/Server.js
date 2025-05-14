@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 
 app.use(cors({
-  origin: 'https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app',  // 👈 Match your frontend
+  origin: 'https://personal-assistant-alpha.vercel.app',  // 👈 Match your frontend
   credentials: true   
 }));
 const oauth2Client = new google.auth.OAuth2(
