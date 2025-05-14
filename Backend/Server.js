@@ -66,7 +66,6 @@ app.get("/oauth2callback", async (req, res) => {
 
 
 app.use('/audio', AudioPaths);
-app.use('/chat', ChatPaths);
 
 // Start server
 app.listen(PORT, () => {
