@@ -13,7 +13,7 @@ export const AudioRecorder = () => {
 
   const handleLogin = () => {
     // Redirect to the backend to initiate Google OAuth
-    window.location.href = 'http://localhost:5000/auth';
+    window.location.href = 'https://personal-assistant-backend-i6q8.onrender.com/auth';
   };
   
   const startRecording = async () => {
@@ -43,7 +43,7 @@ export const AudioRecorder = () => {
         setResultJson(null);
 
         try {
-          const response = await fetch("http://localhost:5000/audio/transcribe", {
+          const response = await fetch("https://personal-assistant-backend-i6q8.onrender.com/audio/transcribe", {
             method: "POST",
             body: formData,
             credentials:'include',
@@ -83,7 +83,7 @@ export const AudioRecorder = () => {
 
   useEffect(() => {
     // Fetch a success message or status from the backend
-    fetch('http://localhost:5000/oauth2callback')
+    fetch('https://personal-assistant-backend-i6q8.onrender.com/oauth2callback')
       .then(response => response.text())
       .then(data => setMessage(data))
       .catch(error => setMessage('Authentication failed'));
