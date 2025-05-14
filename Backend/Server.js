@@ -49,7 +49,9 @@ app.get("/auth", (req, res) => {
 
 app.get("/oauth2callback", async (req, res) => {
   const { code } = req.query;
-  console.log(code)
+  console.log("Received code:", code);  // Log the code to ensure it is received
+
+  // Check if the code is present in the query parameters
   if (!code) {
     console.error("OAuth2 callback error: No code received.");
     return res.redirect("https://personal-assistant-alpha.vercel.app");  // Handle failure appropriately
@@ -59,13 +61,19 @@ app.get("/oauth2callback", async (req, res) => {
     // Exchange the authorization code for tokens
     const { tokens } = await oauth2Client.getToken(code);
     
+    // Ensure tokens are present and log for debugging purposes
+    if (!tokens || !tokens.access_token) {
+      console.error("Error: Tokens or access_token are missing.");
+      return res.redirect("https://personal-assistant-alpha.vercel.app");  // Handle failure appropriately
+    }
+
     // Set the tokens to OAuth2 client for future requests
     oauth2Client.setCredentials(tokens);
 
     // Store tokens in session (ensure session is properly set up)
     req.session.tokens = tokens;
 
-    console.log("Tokens received and session set:", tokens); // For debugging purposes
+    console.log("Tokens received and session set:", tokens); // Log tokens for debugging
 
     // Redirect the user to a success page on the frontend
     res.redirect("https://personal-assistant-alpha.vercel.app/oauth-success");
