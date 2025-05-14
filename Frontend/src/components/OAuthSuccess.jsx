@@ -1,6 +1,6 @@
-import Threads from './components/Threads';
+import Threads from './Threads';
 import { Link } from 'react-router';
-import BlurText from './components/BlurText'
+import BlurText from './BlurText'
 
 
 

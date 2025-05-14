@@ -1,6 +1,6 @@
 import {AudioRecorder} from "./components/AudioRecorder";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import OAuthSuccess from './OAuthSuccess';
+import OAuthSuccess from './components/OAuthSuccess';
 
 
 function App() {  
