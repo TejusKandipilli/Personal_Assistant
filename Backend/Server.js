@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 
 app.use(cors({
-  origin: 'http://localhost:5173',  // 👈 Match your frontend
+  origin: 'https://personal-assistant-frontend-vr7q.onrender.com',  // 👈 Match your frontend
   credentials: true   
 }));
 const oauth2Client = new google.auth.OAuth2(
