@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 
 app.use(cors({
-  origin: 'https://personal-assistant-alpha.vercel.app/',  // 👈 Match your frontend
+  origin: 'https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app',  // 👈 Match your frontend
   credentials: true   
 }));
 const oauth2Client = new google.auth.OAuth2(
@@ -56,10 +56,10 @@ app.get("/oauth2callback", async (req, res) => {
     req.session.tokens = tokens;
 
     // ✅ Redirect to frontend success page
-    res.redirect("https://personal-assistant-alpha.vercel.app/oauth-success");
+    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app/oauth-success");
   } catch (error) {
     console.error("Error exchanging code for tokens", error);
-    res.redirect("https://personal-assistant-alpha.vercel.app/oauth-failure");
+    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app/oauth-failure");
   }
 });
 
