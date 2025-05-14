@@ -76,7 +76,7 @@ Important:
     });
 
     const fullText = response?.text || "No output received";
-    console.log(fullText)
+    console.log(fullText);
     // Split plain text from JSON string (assumes JSON starts at first "{")
     const jsonStartIndex = fullText.indexOf("{");
     const plainTextPart = fullText.slice(0, jsonStartIndex).trim();
@@ -101,15 +101,38 @@ Important:
       process.env.REDIRECT_URI
     );
 
+    if (!req.session.tokens || !req.session.tokens.access_token) {
+      return res.status(400).json({ error: "Missing access token" });
+    }
+
     oauth2Client.setCredentials(req.session.tokens);
 
     const calendar = google.calendar({ version: "v3", auth: oauth2Client });
     const tasksAPI = google.tasks({ version: "v1", auth: oauth2Client });
     const gmail = google.gmail({ version: "v1", auth: oauth2Client });
 
+    // Token expiry check and refresh if needed
+    const currentTime = Date.now();
+    const tokenExpiry = req.session.tokens.expiry_date;
+    if (currentTime >= tokenExpiry) {
+      try {
+        const { tokens } = await oauth2Client.refreshAccessToken();
+        req.session.tokens = tokens;
+        oauth2Client.setCredentials(tokens);
+        console.log("Token refreshed successfully.");
+      } catch (err) {
+        console.error("Error refreshing token:", err);
+        return res.status(500).json({ error: "Failed to refresh access token" });
+      }
+    } else {
+      console.log("Access token is valid.");
+    }
+
     // Add events to Google Calendar (All-Day Events)
     for (const event of events) {
       const { event_name, date } = event;
+      if (!date || !event_name) continue; // Skip invalid events
+
       const eventDetails = {
         summary: event_name,
         start: {
@@ -136,6 +159,7 @@ Important:
     // Add tasks to Google Tasks
     for (const task of tasks) {
       const { title, notes, due, status } = task;
+      if (!title) continue; // Skip invalid tasks
 
       const taskDetails = {
         title,
@@ -158,6 +182,7 @@ Important:
     // Create draft emails in Gmail
     for (const mail of mailList) {
       const { to, subject, body } = mail;
+      if (!to || !subject || !body) continue; // Skip incomplete email info
 
       const email = [
         `To: ${to}`,
