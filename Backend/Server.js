@@ -59,7 +59,7 @@ app.get("/oauth2callback", async (req, res) => {
     res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app/oauth-success");
   } catch (error) {
     console.error("Error exchanging code for tokens", error);
-    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app/oauth-failure");
+    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app");
   }
 });
 
