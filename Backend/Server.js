@@ -23,7 +23,7 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.REDIRECT_URI       // Your redirect URI
 );
 app.use(session({
-  secret: process.env.SESSION_SECRET,      // 🔒 Used to sign the session ID cookie
+  secret: "most_top_secret",      // 🔒 Used to sign the session ID cookie
   resave: false,                  // 🔄 Avoid resaving unchanged sessions
   saveUninitialized: false,       // 💾 Don't save empty sessions
   cookie: {
