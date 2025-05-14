@@ -57,10 +57,10 @@ app.get("/oauth2callback", async (req, res) => {
     req.session.tokens = tokens;
 
     // ✅ Redirect to frontend success page
-    res.redirect("http://localhost:5173/oauth-success");
+    res.redirect("https://personal-assistant-frontend-vr7q.onrender.com/oauth-success");
   } catch (error) {
     console.error("Error exchanging code for tokens", error);
-    res.redirect("http://localhost:5173/oauth-failure");
+    res.redirect("https://personal-assistant-frontend-vr7q.onrender.com/oauth-failure");
   }
 });
 
