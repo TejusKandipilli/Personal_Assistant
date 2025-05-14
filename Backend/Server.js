@@ -56,10 +56,10 @@ app.get("/oauth2callback", async (req, res) => {
     req.session.tokens = tokens;
 
     // ✅ Redirect to frontend success page
-    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app/oauth-success");
+    res.redirect("https://personal-assistant-alpha.vercel.app/oauth-success");
   } catch (error) {
     console.error("Error exchanging code for tokens", error);
-    res.redirect("https://personal-assistant-8zoyn10st-tejuskandipillis-projects.vercel.app");
+    res.redirect("https://personal-assistant-alpha.vercel.app");
   }
 });
 
