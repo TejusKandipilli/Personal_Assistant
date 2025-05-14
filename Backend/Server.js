@@ -26,7 +26,7 @@ app.use(session({
   resave: false,                  // 🔄 Avoid resaving unchanged sessions
   saveUninitialized: false,       // 💾 Don't save empty sessions
   cookie: {
-    maxAge: 1000 * 60 * 60  // ⏰ 1 day (in ms)
+    maxAge: 1000 * 60 * 60 * 24 // ⏰ 1 day (in ms)
   }
 }));
 app.use(express.json());
@@ -49,7 +49,7 @@ app.get("/auth", (req, res) => {
 
 app.get("/oauth2callback", async (req, res) => {
   const { code } = req.query;
-
+  console.log(code)
   if (!code) {
     console.error("OAuth2 callback error: No code received.");
     return res.redirect("https://personal-assistant-alpha.vercel.app");  // Handle failure appropriately
@@ -73,7 +73,7 @@ app.get("/oauth2callback", async (req, res) => {
     console.error("Error exchanging code for tokens", error);
 
     // If an error occurs, redirect to a failure page on the frontend
-    res.redirect("https://personal-assistant-alpha.vercel.app/oauth-failed");
+    res.redirect("https://personal-assistant-alpha.vercel.app");
   }
 });
 
